@@ -9,10 +9,8 @@
       </div>
       <hr>
       <ul class="list-group">
-        <li class="list-group-item" style="cursor:pointer">Tarefa 1
-          <button class="btn btn-sm btn-danger float-right">Del</button>
-        </li>
-        <li class="list-group-item">Tarefa 2
+        <li class="list-group-item pointer" v-for="tarefa in tarefas" :key="tarefa.id">
+          <span :class="{ finalizado: tarefa.finalizada }">{{ tarefa.descricao }}</span>
           <button class="btn btn-sm btn-danger float-right">Del</button>
         </li>
       </ul>
@@ -22,6 +20,20 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  computed: {
+    tarefas() {
+      return this.$store.getters['tarefas/getTarefas'] 
+    }
+  }
 }
 </script>
+
+<style>
+  .pointer {
+    cursor: pointer
+  }
+  .finalizado {
+    text-decoration: line-through
+  }
+</style>
