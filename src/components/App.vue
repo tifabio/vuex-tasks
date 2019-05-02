@@ -8,6 +8,10 @@
         </span>
       </div>
       <hr>
+      <button class="btn btn-primary mb-3" type="button" disabled v-if="carregando">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="ml-2">Carregando...</span>
+      </button>
       <div class="alert alert-dark" v-if="tarefas.length === 0">
         Nenhuma tarefa cadastrada
       </div>
@@ -36,6 +40,9 @@ export default {
   computed: {
     tarefas() {
       return this.$store.getters['tarefas/getTarefas'] 
+    },
+    carregando() {
+      return this.$store.getters['tarefas/getCarregando'] 
     }
   },
   methods: {
@@ -58,6 +65,9 @@ export default {
     atualizaTarefa(tarefa) {
       this.$store.dispatch('tarefas/atualizaTarefa', tarefa)
     }
+  },
+  created() {
+    this.$store.dispatch('tarefas/loadTarefas')
   }
 }
 </script>
