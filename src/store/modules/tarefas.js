@@ -20,11 +20,17 @@ export default {
     mutations: {
       ADD_TAREFA (state, tarefa) {
         state.tarefas.push(tarefa)
+      },
+      DEL_TAREFA (state, tarefa) {
+        state.tarefas = state.tarefas.filter( el => el.id !== tarefa.id )
       }
     },
     actions: {
       addTarefa ({ commit }, tarefa) {
         commit('ADD_TAREFA', tarefa)
+      },
+      delTarefa ({commit}, tarefa) {
+        commit('DEL_TAREFA', tarefa)
       }
     }
 }

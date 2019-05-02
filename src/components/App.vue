@@ -11,7 +11,7 @@
       <ul class="list-group">
         <li class="list-group-item pointer" v-for="tarefa in tarefas" :key="tarefa.id">
           <span :class="{ finalizado: tarefa.finalizada }">{{ tarefa.descricao }}</span>
-          <button class="btn btn-sm btn-danger float-right">Del</button>
+          <button class="btn btn-sm btn-danger float-right" @click="delTarefa(tarefa)">Del</button>
         </li>
       </ul>
     </div>
@@ -48,6 +48,9 @@ export default {
 
       this.$store.dispatch('tarefas/addTarefa', tarefa)
       this.tarefa.descricao = ''
+    },
+    delTarefa(tarefa) {
+      this.$store.dispatch('tarefas/delTarefa', tarefa)
     }
   }
 }
