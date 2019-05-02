@@ -44,9 +44,9 @@ export default {
       loadTarefas ({ commit }) {
         commit('SET_CARREGANDO', true)
         $http('/tasks.json').then(response => {
+          commit('SET_CARREGANDO', false)
           if(!response.data) return
           commit('SET_TAREFAS', Object.values(response.data))
-          commit('SET_CARREGANDO', false)
         })
       }
     }
