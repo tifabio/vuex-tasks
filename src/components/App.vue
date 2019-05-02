@@ -2,9 +2,9 @@
   <div id="app">
     <div class="container mt-3">
       <div class="input-group">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" v-model="tarefa.descricao" @keyup.enter="addTarefa">
         <span class="input-group-btn">
-          <button class="btn btn-info" type="button">Add</button>
+          <button class="btn btn-info" type="button" @click="addTarefa">Add</button>
         </span>
       </div>
       <hr>
@@ -19,11 +19,35 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'app',
+  data() {
+    return {
+      tarefa: {
+        descricao: ''
+      }
+    }
+  },
   computed: {
     tarefas() {
       return this.$store.getters['tarefas/getTarefas'] 
+    }
+  },
+  methods: {
+    addTarefa() {
+      const descricao = this.tarefa.descricao.trim()
+      if(!descricao) return
+      
+      const tarefa = {
+        id: Vue.uuid(),
+        descricao: descricao,
+        finalizada: false
+      }
+
+      this.$store.dispatch('tarefas/addTarefa', tarefa)
+      this.tarefa.descricao = ''
     }
   }
 }

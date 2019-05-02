@@ -16,5 +16,15 @@ export default {
     },
     getters: {
         getTarefas: state => state.tarefas
+    },
+    mutations: {
+      ADD_TAREFA (state, tarefa) {
+        state.tarefas.push(tarefa)
+      }
+    },
+    actions: {
+      addTarefa ({ commit }, tarefa) {
+        commit('ADD_TAREFA', tarefa)
+      }
     }
 }
