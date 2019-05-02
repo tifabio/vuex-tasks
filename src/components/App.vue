@@ -8,6 +8,9 @@
         </span>
       </div>
       <hr>
+      <div class="alert alert-dark" v-if="tarefas.length === 0">
+        Nenhuma tarefa cadastrada
+      </div>
       <ul class="list-group">
         <li class="list-group-item pointer" v-for="tarefa in tarefas" :key="tarefa.id" @click="atualizaTarefa(tarefa)">
           <span :class="{ finalizado: tarefa.finalizada }">{{ tarefa.descricao }}</span>
