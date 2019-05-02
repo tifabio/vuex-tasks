@@ -9,9 +9,9 @@
       </div>
       <hr>
       <ul class="list-group">
-        <li class="list-group-item pointer" v-for="tarefa in tarefas" :key="tarefa.id">
+        <li class="list-group-item pointer" v-for="tarefa in tarefas" :key="tarefa.id" @click="atualizaTarefa(tarefa)">
           <span :class="{ finalizado: tarefa.finalizada }">{{ tarefa.descricao }}</span>
-          <button class="btn btn-sm btn-danger float-right" @click="delTarefa(tarefa)">Del</button>
+          <button class="btn btn-sm btn-danger float-right" @click.stop="delTarefa(tarefa)">Del</button>
         </li>
       </ul>
     </div>
@@ -51,6 +51,9 @@ export default {
     },
     delTarefa(tarefa) {
       this.$store.dispatch('tarefas/delTarefa', tarefa)
+    },
+    atualizaTarefa(tarefa) {
+      this.$store.dispatch('tarefas/atualizaTarefa', tarefa)
     }
   }
 }

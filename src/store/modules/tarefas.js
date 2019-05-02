@@ -23,7 +23,10 @@ export default {
       },
       DEL_TAREFA (state, tarefa) {
         state.tarefas = state.tarefas.filter( el => el.id !== tarefa.id )
-      }
+      },
+      UPD_TAREFA (state, tarefa) {
+        tarefa.finalizada = !tarefa.finalizada
+      },
     },
     actions: {
       addTarefa ({ commit }, tarefa) {
@@ -31,6 +34,9 @@ export default {
       },
       delTarefa ({commit}, tarefa) {
         commit('DEL_TAREFA', tarefa)
+      },
+      atualizaTarefa ({commit}, tarefa) {
+        commit('UPD_TAREFA', tarefa)
       }
     }
 }
